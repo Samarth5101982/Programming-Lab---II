@@ -1,0 +1,43 @@
+# creating a Student Dictionary
+
+student = {
+    "Name": "Gaurav Gade",
+    "RegNo": 23141050,
+    "Department": "IT",
+    "Year": "SY",
+    "Marks(CGPA)": 9.0,
+    "Address": {  # Added nested dictionary
+        "City": "Nashik",
+        "State": "Maharashtra",
+        "Pincode": 422209
+    }
+}
+print(student)
+
+# update Year and Marks values
+
+student["Year"] = "TY"
+student["Marks(CGPA)"] = 9.1
+print(student)
+print(student["Name"])
+
+# Accessing nested dictionary values
+print(student["Address"]["City"])  # Output: Nashik
+print(student["Address"]["Pincode"]) # Output: 422001
+
+#creating null dictionary
+
+stud = {}
+print(stud)
+
+# Methods of dictionary
+
+print(student.keys())
+
+print(student.values())
+
+print((student.get("Address")).get("City"))
+
+#adding new key value pair to nested dictionary.
+student["Address"]["Country"]="India"
+print(student)
