@@ -1,0 +1,726 @@
+import random
+
+def play_quiz(num_questions):
+    """Allows the user to play a quiz with a specified number of questions."""
+    default_questions = [
+        {
+            'question': "What is the output of 'print(type([1,2]))'?",
+            'options': ["list", "tuple", "set"],
+            'correct_answer': "list"
+        },
+        {
+            'question': "Which function is used to add an element to a list?",
+            'options': ["append()", "add()", "insert()"],
+            'correct_answer': "append()"
+        },
+        {
+            'question': "What is the correct method to use when you want to read a file in Python?",
+            'options': ["read()", "open()", "file()"],
+            'correct_answer': "open()"
+        },
+        {
+            'question': "What will be the output of bool(0)?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "False"
+        },
+        {
+            'question': "Which operator is used for exponentiation?",
+            'options': ["^", "**", "//"],
+            'correct_answer': "**"
+        },
+        {
+            'question': "What is the data type of the return value of the len() function?",
+            'options': ["int", "float", "string"],
+            'correct_answer': "int"
+        },
+        {
+            'question': "Which method is used to remove the last element from a list?",
+            'options': ["remove()", "pop()", "delete()"],
+            'correct_answer': "pop()"
+        },
+        {
+            'question': "What is the output of 'print(3 * '7')'?",
+            'options': ["21", "777", "Error"],
+            'correct_answer': "777"
+        },
+        {
+            'question': "Which function is used to convert a string to an integer?",
+            'options': ["int()", "str()", "convert()"],
+            'correct_answer': "int()"
+        },
+        {
+            'question': "What is the name of Python's package manager?",
+            'options': ["pip", "conda", "apt"],
+            'correct_answer': "pip"
+        },
+        {
+            'question': "What is the purpose of the 'if __name__ == \"__main__\"' block?",
+            'options': ["To define the main function", "To prevent the code from running if the script is imported as a module", "To include external libraries"],
+            'correct_answer': "To prevent the code from running if the script is imported as a module"
+        },
+        {
+            'question': "Which loop is used to iterate over a sequence (list, tuple, string) in Python?",
+            'options': ["while loop", "for loop", "do-while loop"],
+            'correct_answer': "for loop"
+        },
+        {
+            'question': "What is the output of 'print(10 // 3)'?",
+            'options': ["3.33", "3", "3.0"],
+            'correct_answer': "3"
+        },
+        {
+            'question': "Which data structure is immutable in Python?",
+            'options': ["list", "tuple", "dictionary"],
+            'correct_answer': "tuple"
+        },
+        {
+            'question': "What does the 'strip()' method do?",
+            'options': ["Removes leading and trailing whitespaces", "Removes all whitespaces", "Adds whitespaces"],
+            'correct_answer': "Removes leading and trailing whitespaces"
+        },
+        {
+            'question': "What is the output of 'print(2 ** 3 + 1)'?",
+            'options': ["7", "9", "6"],
+            'correct_answer': "9"
+        },
+        {
+            'question': "Which keyword is used to define a function in Python?",
+            'options': ["def", "function", "define"],
+            'correct_answer': "def"
+        },
+        {
+            'question': "What is the default return value of a function if no return statement is explicitly used?",
+            'options': ["0", "None", "Error"],
+            'correct_answer': "None"
+        },
+        {
+            'question': "Which method is used to sort a list in place?",
+            'options': ["sorted()", "sort()", "order()"],
+            'correct_answer': "sort()"
+        },
+        {
+            'question': "What is the output of 'print('Hello' + ' ' + 'World')'?",
+            'options': ["HelloWorld", "Hello World", "Error"],
+            'correct_answer': "Hello World"
+        },
+        {
+            'question': "What is the purpose of the 'try' and 'except' block?",
+            'options': ["To define a function", "To handle exceptions (errors)", "To create a loop"],
+            'correct_answer': "To handle exceptions (errors)"
+        },
+        {
+            'question': "Which of the following is a mutable data type?",
+            'options': ["string", "integer", "list"],
+            'correct_answer': "list"
+        },
+        {
+            'question': "What does the 'range()' function return?",
+            'options': ["A list", "A tuple", "A sequence of numbers"],
+            'correct_answer': "A sequence of numbers"
+        },
+        {
+            'question': "What is the output of 'print(5 == '5')'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "False"
+        },
+        {
+            'question': "Which method is used to add a key-value pair to a dictionary?",
+            'options': ["add()", "insert()", "update()"],
+            'correct_answer': "update()"
+        },
+        {
+            'question': "What is the output of 'print(type({1, 2, 3}))'?",
+            'options': ["list", "set", "tuple"],
+            'correct_answer': "set"
+        },
+        {
+            'question': "Which symbol is used for comments in Python?",
+            'options': ["//", "#", "--"],
+            'correct_answer': "#"
+        },
+        {
+            'question': "What is the output of 'print(4 // 2 + 1)'?",
+            'options': ["3", "2.5", "2"],
+            'correct_answer': "3"
+        },
+        {
+            'question': "Which function is used to find the length of a string?",
+            'options': ["size()", "length()", "len()"],
+            'correct_answer': "len()"
+        },
+        {
+            'question': "What is the output of 'print(list(range(3, 6)))'?",
+            'options': ["[3, 4, 5]", "[3, 4, 5, 6]", "(3, 4, 5)"],
+            'correct_answer': "[3, 4, 5]"
+        },
+        {
+            'question': "Which keyword is used to import a module in Python?",
+            'options': ["include", "import", "require"],
+            'correct_answer': "import"
+        },
+        {
+            'question': "What is the output of 'print(type(None))'?",
+            'options': ["NoneType", "nil", "null"],
+            'correct_answer': "NoneType"
+        },
+        {
+            'question': "Which operator is used for floor division?",
+            'options': ["/", "//", "%"],
+            'correct_answer': "//"
+        },
+        {
+            'question': "What is the output of 'print(round(3.14159, 2))'?",
+            'options': ["3.14", "3.1", "3.15"],
+            'correct_answer': "3.14"
+        },
+        {
+            'question': "Which method is used to convert a string to uppercase?",
+            'options': ["upper()", "capitalize()", "toUpper()"],
+            'correct_answer': "upper()"
+        },
+        {
+            'question': "What is the output of 'print(7 % 3)'?",
+            'options': ["1", "2", "0"],
+            'correct_answer': "1"
+        },
+        {
+            'question': "Which function is used to reverse a list?",
+            'options': ["reverse()", "reversed()", "flip()"],
+            'correct_answer': "reverse()"
+        },
+        {
+            'question': "What is the output of 'print('Python'.replace('P', 'J'))'?",
+            'options': ["Jython", "Python", "Jyhton"],
+            'correct_answer': "Jython"
+        },
+        {
+            'question': "Which method is used to check if a string starts with a specific prefix?",
+            'options': ["startswith()", "beginwith()", "prefix()"],
+            'correct_answer': "startswith()"
+        },
+        {
+            'question': "What is the output of 'print(abs(-5))'?",
+            'options': ["-5", "5", "Error"],
+            'correct_answer': "5"
+        },
+        {
+            'question': "Which function is used to find the maximum value in a list?",
+            'options': ["max()", "maximum()", "largest()"],
+            'correct_answer': "max()"
+        },
+        {
+            'question': "What is the output of 'print(bool(' '))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "True"
+        },
+        {
+            'question': "Which method is used to insert an element at a specific index in a list?",
+            'options': ["add()", "insert()", "append()"],
+            'correct_answer': "insert()"
+        },
+        {
+            'question': "What is the output of 'print('apple'.count('p'))'?",
+            'options': ["1", "2", "0"],
+            'correct_answer': "2"
+        },
+        {
+            'question': "Which function is used to remove all elements from a list?",
+            'options': ["clear()", "remove()", "delete()"],
+            'correct_answer': "clear()"
+        },
+        {
+            'question': "What is the output of 'print(pow(2, 3))'?",
+            'options': ["6", "8", "9"],
+            'correct_answer': "8"
+        },
+        {
+            'question': "Which method is used to join elements of a list into a string?",
+            'options': ["join()", "concat()", "merge()"],
+            'correct_answer': "join()"
+        },
+        {
+            'question': "What is the output of 'print(divmod(10, 3))'?",
+            'options': ["(3, 1)", "(1, 3)", "Error"],
+            'correct_answer': "(3, 1)"
+        },
+        {
+            'question': "Which function is used to get the integer part of a number?",
+            'options': ["int()", "floor()", "trunc()"],
+            'correct_answer': "trunc()"
+        },
+        {
+            'question': "What is the output of  'print(all([True, 1, 'a']))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "True"
+        },
+        {
+            'question': "Which method is used to get the index of the first occurrence of a value in a list?",
+            'options': ["index()", "find()", "search()"],
+            'correct_answer': "index()"
+        },
+        {
+            'question': "What is the output of 'print(any([False, 0, '']))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "False"
+        },
+        {
+            'question': "Which function is used to convert a number to its binary representation?",
+            'options': ["bin()", "binary()", "to_binary()"],
+            'correct_answer': "bin()"
+        },
+        {
+            'question': "What is the output of 'print(chr(65))'?",
+            'options': ["A", "a", "65"],
+            'correct_answer': "A"
+        },
+        {
+            'question': "Which function is the inverse of chr()?",
+            'options': ["ord()", "ascii()", "int()"],
+            'correct_answer': "ord()"
+        },
+        {
+            'question': "What is the output of 'print(cmp(3, 3))'?",
+            'options': ["0", "1", "-1"],
+            'correct_answer': "Error"
+        },
+        {
+            'question': "Which module provides functions for working with regular expressions?",
+            'options': ["re", "regex", "regexp"],
+            'correct_answer': "re"
+        },
+        {
+            'question': "What is the output of 'print(math.sqrt(16))'?",
+            'options': ["4", "4.0", "Error"],
+            'correct_answer': "4.0"
+        },
+        {
+            'question': "Which function is used to generate a random number between 0 and 1?",
+            'options': ["random()", "uniform()", "rand()"],
+            'correct_answer': "random()"
+        },
+        {
+            'question': "What is the output of 'print(time.time())'?",
+            'options': ["Current date", "Current time in seconds since the epoch", "Current time in HH:MM:SS format"],
+            'correct_answer': "Current time in seconds since the epoch"
+        },
+        {
+            'question': "Which module provides functions for working with dates and times?",
+            'options': ["datetime", "calendar", "time"],
+            'correct_answer': "datetime"
+        },
+        {
+            'question': "What is the output of 'print(os.getcwd())'?",
+            'options': ["Current working directory", "Operating system name", "Current user name"],
+            'correct_answer': "Current working directory"
+        },
+        {
+            'question': "Which function is used to change the current working directory?",
+            'options': ["chdir()", "cwd()", "change_dir()"],
+            'correct_answer': "chdir()"
+        },
+        {
+            'question': "What is the output of 'print(sys.version_info.major)'?",
+            'options': ["Python version string", "Major version number", "Minor version number"],
+            'correct_answer': "Major version number"
+        },
+        {
+            'question': "Which module provides access to system-specific parameters and functions?",
+            'options': ["os", "sys", "platform"],
+            'correct_answer': "sys"
+        },
+        {
+            'question': "What is the output of 'print(platform.system())'?",
+            'options': ["Operating system name", "Platform architecture", "Python version"],
+            'correct_answer': "Operating system name"
+        },
+        {
+            'question': "Which function is used to get the list of arguments passed to a script?",
+            'options': ["argv", "args", "arguments"],
+            'correct_answer': "argv"
+        },
+        {
+            'question': "What is the output of 'print(json.dumps({'name': 'John', 'age': 30}))'?",
+            'options': ["{'name': 'John', 'age': 30}", "{'name': 'John', 'age': 30}", """{"name": "John", "age": 30}"""],
+            'correct_answer': """{"name": "John", "age": 30}"""
+        },
+        {
+            'question': "Which module is used for working with JSON data?",
+            'options': ["json", "xml", "pickle"],
+            'correct_answer': "json"
+        },
+        {
+            'question': "What is the output of 'print(random.randint(1, 10))'?",
+            'options': ["A random float between 0 and 1", "A random integer between 1 and 10 (inclusive)", "A random integer between 1 and 10 (exclusive)"],
+            'correct_answer': "A random integer between 1 and 10 (inclusive)"
+        },
+        {
+            'question': "Which function is used to shuffle the elements of a list randomly?",
+            'options': ["shuffle()", "randomize()", "mix()"],
+            'correct_answer': "shuffle()"
+        },
+        {
+            'question': "What is the output of 'print(datetime.datetime.now())'?",
+            'options': ["Current date", "Current time", "Current date and time"],
+            'correct_answer': "Current date and time"
+        },
+        {
+            'question': "Which method of a datetime object is used to format it as a string?",
+            'options': ["format()", "strftime()", "toString()"],
+            'correct_answer': "strftime()"
+        },
+        {
+            'question': "What is the output of 'print(math.ceil(4.2))'?",
+            'options': ["4", "5", "4.0"],
+            'correct_answer': "5"
+        },
+        {
+            'question': "Which function is used to find the smallest integer not less than x?",
+            'options': ["floor()", "ceil()", "round()"],
+            'correct_answer': "ceil()"
+        },
+        {
+            'question': "What is the output of 'print(math.log(100, 10))'?",
+            'options': ["10", "2", "100"],
+            'correct_answer': "2"
+        },
+        {
+            'question': "Which function is used to calculate the logarithm of a number to a given base?",
+            'options': ["log()", "ln()", "log_base()"],
+            'correct_answer': "log()"
+        },
+        {
+            'question': "What is the output of 'print(math.pi)'?",
+            'options': ["3.14", "3.14159", "22/7"],
+            'correct_answer': "3.14159"
+        },
+        {
+            'question': "Which constant represents the mathematical constant pi?",
+            'options': ["pi", "PI", "Math.PI"],
+            'correct_answer': "pi"
+        },
+        {
+            'question': "What is the output of 'print(math.cos(0))'?",
+            'options': ["0", "1", "-1"],
+            'correct_answer': "1"
+        },
+        {
+            'question': "Which function is used to calculate the cosine of an angle in radians?",
+            'options': ["cos()", "cosine()", "arccos()"],
+            'correct_answer': "cos()"
+        },
+        {
+            'question': "What is the output of 'print(math.degrees(math.pi))'?",
+            'options': ["180", "360", "90"],
+            'correct_answer': "180"
+        },
+        {
+            'question': "Which function is used to convert an angle from radians to degrees?",
+            'options': ["degrees()", "radians()", "deg2rad()"],
+            'correct_answer': "degrees()"
+        },
+        {
+            'question': "What is the output of 'print(math.factorial(5))'?",
+            'options': ["15", "120", "24"],
+            'correct_answer': "120"
+        },
+        {
+            'question': "Which function is used to calculate the factorial of a number?",
+            'options': ["factorial()", "fact()", "gamma()"],
+            'correct_answer': "factorial()"
+        },
+        {
+            'question': "What is the output of 'print(math.e)'?",
+            'options': ["2.71", "2.71828", "3.14159"],
+            'correct_answer': "2.71828"
+        },
+        {
+            'question': "Which constant represents the base of the natural logarithm?",
+            'options': ["e", "E", "Euler"],
+            'correct_answer': "e"
+        },
+        {
+            'question': "What is the output of 'print(math.expm1(1))'?",
+            'options': ["e", "e - 1", "1"],
+            'correct_answer': "e - 1"
+        },
+        {
+            'question': "Which function calculates e^x - 1?",
+            'options': ["exp()", "expm1()", "pow()"],
+            'correct_answer': "expm1()"
+        },
+        {
+            'question': "What is the output of 'print(math.isinf(float('inf')))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "True"
+        },
+        {
+            'question': "Which function checks if a number is infinite?",
+            'options': ["isinf()", "is_infinite()", "inf_check()"],
+            'correct_answer': "isinf()"
+        },
+        {
+            'question': "What is the output of 'print(math.isnan(float('nan')))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "True"
+        },
+        {
+            'question': "Which function checks if a value is 'not a number'?",
+            'options': ["isnan()", "is_nan()", "nan_check()"],
+            'correct_answer': "isnan()"
+        },
+        {
+            'question': "What is the output of 'print(math.log10(1000))'?",
+            'options': ["3", "10", "100"],
+            'correct_answer': "3"
+        },
+        {
+            'question': "Which function calculates the base-10 logarithm of a number?",
+            'options': ["log10()", "log()", "log_10()"],
+            'correct_answer': "log10()"
+        },
+        {
+            'question': "What is the output of 'print(math.log2(8))'?",
+            'options': ["3", "2", "8"],
+            'correct_answer': "3"
+        },
+        {
+            'question': "Which function calculates the base-2 logarithm of a number?",
+            'options': ["log2()", "log()", "log_2()"],
+            'correct_answer': "log2()"
+        },
+        {
+            'question': "What is the output of 'print(math.modf(5.5))'?",
+            'options': ["(0.5, 5.0)", "(5.0, 0.5)", "(5, 0.5)"],
+            'correct_answer': "(0.5, 5.0)"
+        },
+        {
+            'question': "Which function separates the fractional and integer parts of a number?",
+            'options': ["modf()", "split()", "separate()"],
+            'correct_answer': "modf()"
+        },
+        {
+            'question': "What is the output of 'print(math.pow(2, 4))'?",
+            'options': ["8", "16", "24"],
+            'correct_answer': "16"
+        },
+        {
+            'question': "Which function raises a number to a power?",
+            'options': ["pow()", "power()", "**"],
+            'correct_answer': "pow()"
+        },
+        {
+            'question': "What is the output of 'print(math.sin(math.pi / 2))'?",
+            'options': ["0", "1", "-1"],
+            'correct_answer': "1"
+        },
+        {
+            'question': "Which function calculates the sine of an angle in radians?",
+            'options': ["sin()", "sine()", "arcsin()"],
+            'correct_answer': "sin()"
+        },
+        {
+            'question': "What is the output of 'print(math.tan(0))'?",
+            'options': ["0", "1", "Error"],
+            'correct_answer': "0"
+        },
+        {
+            'question': "Which function calculates the tangent of an angle in radians?",
+            'options': ["tan()", "tangent()", "arctan()"],
+            'correct_answer': "tan()"
+        },
+        {
+            'question': "What is the output of 'print(math.trunc(5.9))'?",
+            'options': ["5", "6", "5.0"],
+            'correct_answer': "5"
+        },
+        {
+            'question': "Which function returns the integer part of a number by removing the fractional digits?",
+            'options': ["trunc()", "int()", "floor()"],
+            'correct_answer': "trunc()"
+        },
+        {
+            'question': "What is the output of 'print(random.choice([1, 2, 3, 4, 5]))'?",
+            'options': ["1", "5", "A random element from the list"],
+            'correct_answer': "A random element from the list"
+        },
+        {
+            'question': "Which function returns a randomly selected element from a sequence?",
+            'options': ["choice()", "select()", "pick()"],
+            'correct_answer': "choice()"
+        },
+        {
+            'question': "What is the output of 'print(random.random())'?",
+            'options': ["A random integer", "A random float between 0 and 1", "A random float between 0 and 100"],
+            'correct_answer': "A random float between 0 and 1"
+        },
+        {
+            'question': "Which function returns a random float number between 0 and 1?",
+            'options': ["random()", "uniform()", "randint()"],
+            'correct_answer': "random()"
+        },
+        {
+            'question': "What is the output of 'print(random.randrange(1, 10, 2))'?",
+            'options': ["A random integer between 1 and 10", "A random even integer between 1 and 10", "A random odd integer between 1 and 9"],
+            'correct_answer': "A random odd integer between 1 and 9"
+        },
+        {
+            'question': "Which function returns a randomly selected element from a range?",
+            'options': ["randrange()", "range()", "randint()"],
+            'correct_answer': "randrange()"
+        },
+        {
+            'question': "What is the output of 'print(string.ascii_letters)'?",
+            'options': ["'abcdefghijklmnopqrstuvwxyz'", "'ABCDEFGHIJKLMNOPQRSTUVWXYZ'", "'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'"],
+            'correct_answer': "'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'"
+        },
+        {
+            'question': "Which module provides string constants?",
+            'options': ["str", "string", "text"],
+            'correct_answer': "string"
+        },
+        {
+            'question': "What is the output of 'print(string.digits)'?",
+            'options': ["'0123456789'", "'1234567890'", "A sequence of digits"],
+            'correct_answer': "'0123456789'"
+        },
+        {
+            'question': "Which string constant contains all digit characters?",
+            'options': ["digits", "numbers", "DIGITS"],
+            'correct_answer': "digits"
+        },
+        {
+            'question': "What is the output of 'print(string.punctuation)'?",
+            'options': ["All punctuation characters", "Common punctuation characters", "No punctuation characters"],
+            'correct_answer': "All punctuation characters"
+        },
+        {
+            'question': "Which string constant contains all punctuation characters?",
+            'options': ["punctuation", "punct", "PUNCTUATION"],
+            'correct_answer': "punctuation"
+        },
+        {
+            'question': "What is the output of 'print(datetime.date(2024, 10, 27))'?",
+            'options': ["27-10-2024", "2024-10-27", "October 27, 2024"],
+            'correct_answer': "2024-10-27"
+        },
+        {
+            'question': "Which class is used to represent a date (year, month, day)?",
+            'options': ["date", "datetime", "time"],
+            'correct_answer': "date"
+        },
+        {
+            'question': "What is the output of 'print(datetime.time(10, 30, 45))'?",
+            'options': ["10:30:45", "10-30-45", "10:30 AM"],
+            'correct_answer': "10:30:45"
+        },
+        {
+            'question': "Which class is used to represent a time (hour, minute, second, microsecond)?",
+            'options': ["time", "datetime", "date"],
+            'correct_answer': "time"
+        },
+        {
+            'question': "What is the output of 'print(datetime.datetime(2024, 10, 27, 10, 30, 45))'?",
+            'options': ["2024-10-27 10:30:45", "27-10-2024 10:30:45", "10:30:45 27-10-2024"],
+            'correct_answer': "2024-10-27 10:30:45"
+        },
+        {
+            'question': "Which class is used to represent a specific moment in time?",
+            'options': ["datetime", "date", "time"],
+            'correct_answer': "datetime"
+        },
+        {
+            'question': "What is the output of 'print(calendar.month(2024, 10))'?",
+            'options': ["A formatted string representing the month of October 2024", "A list of days in October 2024", "A dictionary representing October 2024"],
+            'correct_answer': "A formatted string representing the month of October 2024"
+        },
+        {
+            'question': "Which module provides functions for working with calendars?",
+            'options': ["datetime", "calendar", "time"],
+            'correct_answer': "calendar"
+        },
+        {
+            'question': "What is the output of 'print(math.isclose(1.0001, 1.0, rel_tol=0.01))'?",
+            'options': ["True", "False", "Error"],
+            'correct_answer': "True"
+        },
+        {
+            'question': "Which function is used to compare two floating-point values for approximate equality?",
+            'options': ["isclose()", "close()", "approx_equal()"],
+            'correct_answer': "isclose()"
+        },
+    ]
+
+    score = 0
+    print("\n--- Play Python Quiz ---")
+
+    if num_questions > len(default_questions):
+        print(f"There are only {len(default_questions)} questions available.  You will be asked all of them.")
+        num_questions = len(default_questions)
+    elif num_questions <= 0:
+        print("Number of questions must be positive. Exiting.")
+        return
+
+    # Randomly select questions
+    selected_questions = random.sample(default_questions, num_questions)
+
+    for i, question_data in enumerate(selected_questions):
+        print(f"\nQuestion {i + 1}: {question_data['question']}")
+        for j, option in enumerate(question_data['options']):
+            print(f"{chr(ord('a') + j)}) {option}")
+
+        user_answer = input("Your answer (enter the option letter): ").lower().strip()
+        correct_answer = question_data['correct_answer'].lower().strip()
+
+        correct_option_letter = None
+        for j, option in enumerate(question_data['options']):
+            if option.lower().strip() == correct_answer:
+                correct_option_letter = chr(ord('a') + j)
+                break
+
+        if user_answer == correct_option_letter:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Incorrect. The correct answer was: {correct_answer} ({correct_option_letter if correct_option_letter else 'not an option'}).")
+
+    print(f"\n--- Quiz Finished ---")
+    print(f"Your final score: {score}/{num_questions}")
+    return score # returning score
+
+def display_menu():
+    """Displays the main menu and gets the user's choice."""
+    print("\n--- Python Quiz Menu ---")
+    print("1. Play Quiz")
+
+    print("2. Exit")
+    choice = input("Enter your choice (1-2): ").strip()
+    return choice
+
+def main():
+    """Main function to run the quiz program."""
+    while True:
+        choice = display_menu()
+
+        if choice == '1':
+            while True:
+                try:
+                    num_questions = int(input("Enter the number of questions you want to answer: "))
+                    if num_questions > 0:
+                        break
+                    else:
+                        print("Please enter a positive number of questions.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
+            final_score = play_quiz(num_questions)
+            if final_score is not None: # added this check
+                print(f"Your score is {final_score}")
+
+        elif choice == '2':
+            print("Exiting the Quiz Program. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
+
+if __name__ == "__main__":
+    main()
